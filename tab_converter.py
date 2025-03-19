@@ -5,6 +5,7 @@ import os
 import xml.etree.ElementTree as ET
 
 
+#read file using utf-8 if doesn't work use latin-1 -> convert rows in lists
 def read_tab_file(filename):
     try:
         with open(filename, 'r', encoding='utf-8') as f:
@@ -17,7 +18,7 @@ def read_tab_file(filename):
     return rows[0], rows[1:]
 
 
-#csv conversion
+#csv file conversion -> writes headers and data to a CSV file using utf-8 encoding
 def write_csv(headers, data, output_filename):
     with open(output_filename, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
@@ -26,7 +27,7 @@ def write_csv(headers, data, output_filename):
     print(f"CSV file saved as {output_filename}")
 
 
-#json conversion
+#json file conversion -> converts data to JSON format by mapping headers to each row's values
 def write_json(headers, data, output_filename):
     json_data = []
     for row in data:
@@ -39,7 +40,7 @@ def write_json(headers, data, output_filename):
     print(f"JSON file saved as {output_filename}")
 
 
-#xml conversion
+#xml file conversion -> converts data to XML format by creating XML elements for each row
 def write_xml(headers, data, output_filename):
     root = ET.Element('Data')
     for row in data:
